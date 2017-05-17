@@ -1,8 +1,9 @@
 package p16interstellar;
 
+import p16interstellar.explicitgrid.State;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Interstellar {
     //Print array of Stars
@@ -47,7 +48,7 @@ public class Interstellar {
                 starList.add(new Star(energy, x, y, z));
             }
 
-            BFSSolver solver = new BFSSolver(cubeAmount, starList);
+            DijkstraSolver solver = new DijkstraSolver(cubeAmount, starList);
             State solution = solver.solve();
             if (solution != null) {
                 int[][] solutionPath = solution.getPath();

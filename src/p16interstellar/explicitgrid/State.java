@@ -1,8 +1,9 @@
-package p16interstellar;
+package p16interstellar.explicitgrid;
+
+import p16interstellar.Star;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public class State {
@@ -162,6 +163,10 @@ public class State {
             {0, 0, 1},
             {0, 0, -1},
     };
+
+    public int getBatteryLevel() {
+        return batteryLevel;
+    }
 
     /**
      * Resulting charge of the battery after visiting the given position.
