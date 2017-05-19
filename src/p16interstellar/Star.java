@@ -7,6 +7,7 @@ public class Star {
     public int[] position;
 
     static final HashMap<String, Integer> TYPE_ENERGY = new HashMap<String, Integer>() {{
+        put(null, 0);
         put("M", 3);
         put("K", 4);
         put("G", 5);

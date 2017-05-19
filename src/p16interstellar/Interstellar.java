@@ -1,6 +1,11 @@
 package p16interstellar;
 
-import p16interstellar.explicitgrid.State;
+import p16interstellar.solver.BFSSolver;
+import p16interstellar.solver.DijkstraSolver;
+import p16interstellar.solver.Solver;
+import p16interstellar.state.ExplicitGridState;
+import p16interstellar.state.ImplicitGridState;
+import p16interstellar.state.State;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -48,11 +53,13 @@ public class Interstellar {
                 starList.add(new Star(energy, x, y, z));
             }
 
-            DijkstraSolver solver = new DijkstraSolver(cubeAmount, starList);
-            State solution = solver.solve();
+            // Implicit grid state with either solver works, but using BFS with
+            // explicit grid takes too long because the search space is large
+
+            Solver solver = new DijkstraSolver(cubeAmount, starList);
+            State solution = solver.solve(new ImplicitGridState(cubeAmount, starList));
             if (solution != null) {
-                int[][] solutionPath = solution.getPath();
-                System.out.println(solutionPath.length - 1);
+                System.out.println(solution.getPathDistance());
             } else {
                 System.out.println("No solution");
             }

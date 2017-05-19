@@ -1,22 +1,22 @@
-package p16interstellar;
+package p16interstellar.solver;
 
-import p16interstellar.explicitgrid.State;
+import p16interstellar.Star;
+import p16interstellar.state.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BFSSolver {
+public class BFSSolver implements Solver {
 
     int size;
     List<Star> starList;
 
-    BFSSolver(int size, List<Star> starList) {
+    public BFSSolver(int size, List<Star> starList) {
         this.size = size;
         this.starList = starList;
     }
 
-    public State solve() {
-        State initialState = new State(size, starList);
+    public State solve(State initialState) {
         ArrayList<State> openStates = new ArrayList<>();
         openStates.add(initialState);
 

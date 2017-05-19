@@ -1,25 +1,26 @@
-package p16interstellar;
+package p16interstellar.solver;
 
-import p16interstellar.explicitgrid.State;
+import p16interstellar.Star;
+import p16interstellar.state.ImplicitGridState;
+import p16interstellar.state.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DijkstraSolver {
+public class DijkstraSolver implements Solver {
 
     int size;
     List<Star> starList;
 
     State[][][] bestState; // The best state that gets us to the position [x][y][z]
 
-    DijkstraSolver(int size, List<Star> starList) {
+    public DijkstraSolver(int size, List<Star> starList) {
         this.size = size;
         this.starList = starList;
         this.bestState = new State[size][size][size];
     }
 
-    public State solve() {
-        State initialState = new State(size, starList);
+    public State solve(State initialState) {
         ArrayList<State> openStates = new ArrayList<>();
         openStates.add(initialState);
         bestState[0][0][0] = initialState;

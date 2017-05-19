@@ -1,4 +1,4 @@
-package p16interstellar.explicitgrid;
+package p16interstellar.state;
 
 import p16interstellar.Star;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class State {
+public class ExplicitGridState implements State {
 
     private int[][] path;
     private int batteryLevel;
@@ -20,7 +20,7 @@ public class State {
      * @param mapSize
      * @param stars
      */
-    public State(int mapSize, List<Star> stars) {
+    public ExplicitGridState(int mapSize, List<Star> stars) {
         this.mapSize = mapSize;
         this.stars = stars;
         this.batteryLevel = MAX_BATTERY_CHARGE;
@@ -34,7 +34,7 @@ public class State {
      * @param previousState
      * @param nextPosition
      */
-    private State(State previousState, int[] nextPosition) {
+    private ExplicitGridState(ExplicitGridState previousState, int[] nextPosition) {
         this.mapSize = previousState.mapSize;
         this.stars = previousState.stars;
         this.path = Arrays.copyOf(previousState.path, previousState.path.length + 1);
@@ -53,7 +53,7 @@ public class State {
         for (int[] v : directionVectors) {
             int[] movePosition = addVector(currentPosition, v);
             if (legalMove(movePosition)) {
-                nextMoves.add( new State(this, movePosition) );
+                nextMoves.add( new ExplicitGridState(this, movePosition) );
 
                 /*
                 for (int[] p : path) {
@@ -105,6 +105,10 @@ public class State {
 
     public int[][] getPath() {
         return path;
+    }
+
+    public int getPathDistance() {
+        return path.length - 1;
     }
 
     private int[] addVector(int[] position, int[] v) {
